@@ -6,7 +6,7 @@ import * as pica from 'pica';
 })
 export class ImageResizeService {
   static resizeImage(
-    from: HTMLImageElement,
+    from: HTMLImageElement | HTMLCanvasElement,
     to: HTMLCanvasElement
   ): Promise<HTMLCanvasElement> {
     const resizer = new pica();

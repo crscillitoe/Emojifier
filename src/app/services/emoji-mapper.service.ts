@@ -5,10 +5,10 @@ import { RGBImage, dictionary } from './constants/emoji-dictionary';
   providedIn: 'root',
 })
 export class EmojiMapperService {
-  emojiMappings: Map<string, string>;
+  emojiMappings: Map<string, RGBImage>;
   constructor() {
     // Create the map
-    this.emojiMappings = new Map<string, string>();
+    this.emojiMappings = new Map<string, RGBImage>();
 
     for (let r = 0; r < 16; r++) {
       for (let g = 0; g < 16; g++) {
@@ -34,7 +34,7 @@ export class EmojiMapperService {
     return `red: ${color.red}, green: ${color.green}, blue: ${color.blue}`;
   }
 
-  getClosestEmoji(color: RGB): string {
+  getClosestEmoji(color: RGB): RGBImage {
     const fourBit = this.toFourBit(color);
     const emoji = this.emojiMappings.get(this.toString(fourBit));
     if (emoji) {
@@ -44,8 +44,8 @@ export class EmojiMapperService {
     throw `Dictionary mapping not found for ${fourBit.red} ${fourBit.green} ${fourBit.blue}`;
   }
 
-  computeClosestEmoji(color: RGB): string {
-    let toReturn: string = '';
+  computeClosestEmoji(color: RGB): RGBImage {
+    let toReturn: RGBImage | null = null;
     let smallestDisance: number = Number.POSITIVE_INFINITY;
     for (const candidate of dictionary) {
       const distanceRed = Math.pow(Math.abs(color.red - candidate.red), 2);
@@ -58,11 +58,11 @@ export class EmojiMapperService {
       const summation = distanceRed + distanceGreen + distanceBlue;
       if (summation < smallestDisance) {
         smallestDisance = summation;
-        toReturn = candidate.imageName;
+        toReturn = candidate;
       }
     }
 
-    if (toReturn === '') {
+    if (!toReturn) {
       throw `Unable to find closest emoji to ${color}`;
     }
 

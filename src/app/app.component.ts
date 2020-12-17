@@ -38,10 +38,11 @@ export class AppComponent {
         const imageBase64 = FileManagerService.bufferToBase64Image(buffer);
         image.src = `data:image/png;base64,${imageBase64}`;
         image.onload = () => {
-          ImageResizeService.resizeImage(image, canvas);
-          this.renderer.render(canvas, rendered);
-          this.rendering = false;
-          this.rendered = true;
+          ImageResizeService.resizeImage(image, canvas).then(() => {
+            this.renderer.render(canvas, rendered);
+            this.rendering = false;
+            this.rendered = true;
+          });
         };
       } else {
         // What the fuck?

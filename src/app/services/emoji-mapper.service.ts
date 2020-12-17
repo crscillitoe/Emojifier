@@ -5,10 +5,10 @@ import { RGBImage, dictionary } from './constants/emoji-dictionary';
   providedIn: 'root',
 })
 export class EmojiMapperService {
-  emojiMappings: Map<RGB, string>;
+  emojiMappings: Map<string, string>;
   constructor() {
     // Create the map
-    this.emojiMappings = new Map<RGB, string>();
+    this.emojiMappings = new Map<string, string>();
 
     for (let r = 0; r < 16; r++) {
       for (let g = 0; g < 16; g++) {
@@ -22,7 +22,7 @@ export class EmojiMapperService {
           const _8bit = this.toEightBit(rgb);
 
           const closestEmoji = this.computeClosestEmoji(_8bit);
-          this.emojiMappings.set(rgb, closestEmoji);
+          this.emojiMappings.set(this.toString(rgb), closestEmoji);
         }
       }
     }
@@ -30,14 +30,18 @@ export class EmojiMapperService {
     console.log(this.emojiMappings);
   }
 
+  toString(color: RGB): string {
+    return `red: ${color.red}, green: ${color.green}, blue: ${color.blue}`;
+  }
+
   getClosestEmoji(color: RGB): string {
     const fourBit = this.toFourBit(color);
-    const emoji = this.emojiMappings.get(fourBit);
+    const emoji = this.emojiMappings.get(this.toString(fourBit));
     if (emoji) {
       return emoji;
     }
 
-    throw `Dictionary mapping not found for ${fourBit}`;
+    throw `Dictionary mapping not found for ${fourBit.red} ${fourBit.green} ${fourBit.blue}`;
   }
 
   computeClosestEmoji(color: RGB): string {

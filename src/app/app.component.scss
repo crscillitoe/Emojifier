@@ -9,9 +9,8 @@ button {
 }
 
 #scaled-image {
-  position: absolute;
-  top: calc((100vh - 500px) / 2);
-  left: calc((100vw - 500px) / 2);
+  width: 500px;
+  height: 500px;
 }
 
 #sprite-map {

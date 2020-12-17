@@ -37,8 +37,6 @@ export class EmojiCanvasRendererService {
       throw 'Unable to get rendering context';
     }
 
-    context.globalAlpha = 1;
-
     for (let x = 0; x < baseWidth; x++) {
       for (let y = 0; y < baseHeight; y++) {
         let img = new Image();

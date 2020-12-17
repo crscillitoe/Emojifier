@@ -32,6 +32,16 @@ export class AppComponent {
     };
   }
 
+  download() {
+    let link = document.createElement('a');
+    link.download = 'emojified.png';
+    link.href = (document.getElementById(
+      'rendered-image'
+    ) as HTMLCanvasElement).toDataURL();
+
+    link.click();
+  }
+
   copy() {
     const rendered: HTMLCanvasElement = document.getElementById(
       'rendered-image'
@@ -54,7 +64,10 @@ export class AppComponent {
     ) as HTMLCanvasElement;
 
     const context = scaledRender.getContext('2d');
-    context?.clearRect(0, 0, 500, 500);
+    if (context) {
+      context.fillStyle = '#7986cb';
+      context.fillRect(0, 0, 500, 500);
+    }
 
     this.rendered = false;
     this.rendering = false;

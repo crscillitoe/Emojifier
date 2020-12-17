@@ -15,8 +15,18 @@ export class AppComponent {
   title = 'Emojifier';
   rendering: boolean = false;
   rendered: boolean = false;
+  loading: boolean = true;
 
-  constructor(private renderer: EmojiCanvasRendererService) {}
+  constructor(private renderer: EmojiCanvasRendererService) {
+    window.onload = () => {
+      this.loading = false;
+    };
+  }
+
+  reset() {
+    this.rendered = false;
+    this.rendering = false;
+  }
 
   onSelect(event: NgxDropzoneChangeEvent) {
     this.rendering = true;

@@ -9,13 +9,15 @@ export class EmojiCanvasRendererService {
   render(toConvert: HTMLCanvasElement, toRender: HTMLCanvasElement) {
     const baseWidth = toConvert.width;
     const baseHeight = toConvert.height;
-    const emojiScale = 20;
+    const emojiScale = 10;
 
     const convertContext = toConvert.getContext('2d');
     const context = toRender.getContext('2d');
     if (!context || !convertContext) {
       throw 'Unable to get rendering context';
     }
+
+    context.globalAlpha = 1;
 
     for (let x = 0; x < baseWidth; x++) {
       for (let y = 0; y < baseHeight; y++) {

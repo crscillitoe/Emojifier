@@ -1,8 +1,9 @@
+<button id="reset" (click)="reset()">Reset</button>
 <div class="big-boy">
   <div class="vertical">
     <div class="horizontal">
       <ngx-dropzone
-        *ngIf="!rendering && !rendered"
+        *ngIf="!rendering && !rendered && !loading"
         class="drop-image-here"
         (change)="onSelect($event)"
       >
@@ -14,12 +15,20 @@
       </ngx-dropzone>
 
       <div *ngIf="rendering" class="drop-image-here">Rendering...</div>
+
+      <div *ngIf="loading">
+        <mat-spinner></mat-spinner>
+        <br />
+        <div style="text-align: center">
+          Loading images... (sorry it takes awhile for now)
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <canvas id="rendered-image" width="1000" height="1000"></canvas>
 <img id="image" />
-<canvas id="canvas" width="50" height="50"></canvas>
+<canvas id="canvas" width="100" height="100"></canvas>
 
 <app-all-the-svgs></app-all-the-svgs>

@@ -1,0 +1,38 @@
+#rendered-image {
+  position: absolute;
+  top: calc((100vh - 1000px) / 2);
+  left: calc((100vw - 1000px) / 2);
+}
+#image {
+  position: absolute;
+  top: 50000px;
+  left: 50000px;
+}
+#canvas {
+  position: absolute;
+  top: 50000px;
+  left: 50000px;
+}
+.big-boy {
+  width: calc(100vw - 16px);
+  height: calc(100vh - 16px);
+}
+
+.vertical,
+.horizontal {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.vertical {
+  height: 100%;
+  flex-direction: column;
+}
+
+.drop-image-here {
+  background-color: #aab6fe;
+  border-radius: 10px;
+  padding: 50px;
+  text-align: center;
+}
